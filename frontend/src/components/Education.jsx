@@ -15,7 +15,7 @@ export default function Education() {
     {
       degree: "Higher Secondary (HSC)",
       institute: "Maharashtra State Board",
-      university: "Science Stream",
+      university: "Vidhyadham College Chh Sambhajinagar",
       score: "81.50%",
       year: "2021 - 2022",
       status: "completed",
@@ -25,7 +25,7 @@ export default function Education() {
     {
       degree: "Secondary School (SSC)",
       institute: "Maharashtra State Board",
-      university: "General",
+      university: "New English High School Chh Sambhajinagar",
       score: "94.20%",
       year: "2019 - 2020",
       status: "completed",
@@ -38,7 +38,7 @@ export default function Education() {
     <section id="education" className="w-full py-24 bg-slate-50 dark:bg-black overflow-hidden relative transition-colors duration-500">
       
       {/* Background Ambience */}
-      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-white to-transparent dark:from-slate-900 dark:to-transparent pointer-events-none"></div>
+      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-black  pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
         
@@ -90,7 +90,7 @@ function TimelineItem({ edu, index, total }) {
       <div className="relative z-10 flex flex-col items-center mb-6 md:mb-8">
         
         {/* Year Chip (Floating) */}
-        <div className={`mb-4 px-3 py-1 rounded-full border bg-white dark:bg-slate-900 shadow-sm text-xs font-bold tracking-wider uppercase transition-transform duration-300 group-hover:-translate-y-1 ${colors[edu.color].split(" ")[2]}`}>
+        <div className={`mb-4 text-black dark:text-white px-3 py-1 rounded-full border bg-white dark:bg-slate-900 shadow-sm text-xs font-bold tracking-wider uppercase transition-transform duration-300 group-hover:-translate-y-1 ${colors[edu.color].split(" ")[2]}`}>
           {edu.year}
         </div>
 

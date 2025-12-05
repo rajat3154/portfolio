@@ -24,7 +24,7 @@ export default function Achievements() {
   ];
 
   return (
-    <section id="achievements" className="relative w-full py-24 bg-slate-50 dark:bg-[#0a0a0a] overflow-hidden">
+    <section id="achievements" className="relative w-full py-24 bg-black overflow-hidden">
       
       {/* Subtle Background Celebration Pattern */}
       <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcmaWxsPSIjOTk5Ij48Y2lyY2xlIGN4PSIyIiBjeT0iMiIgcj0iMiIvPjxjaXJjbGUgY3g9IjEwIiBjeT0iMTAiIHI9IjIiLz48L2c+PC9zdmc+')]"></div>

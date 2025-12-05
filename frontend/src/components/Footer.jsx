@@ -1,141 +1,129 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 export default function Footer() {
-  const [time, setTime] = useState("");
-
-  // Live Clock for the "Status" widget
-  useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      setTime(now.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: true }));
-    };
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
-    return () => clearInterval(interval);
-  }, []);
+  const currentYear = new Date().getFullYear();
 
   const navLinks = [
-    { label: "Skills", href: "#skills" },
+    { label: "Home", href: "#home" },
+    { label: "About", href: "#about" },
     { label: "Projects", href: "#projects" },
     { label: "Experience", href: "#experience" },
-    { label: "Education", href: "#education" },
   ];
 
-  const socials = [
-    { name: "GH", url: "https://github.com/rajat3154", label: "GitHub" },
-    { name: "LI", url: "https://www.linkedin.com/in/rajat-ranvir", label: "LinkedIn" },
-    { name: "TW", url: "https://x.com", label: "Twitter" },
-    { name: "@", url: "mailto:rajaturanvir31@gmail.com", label: "Email" },
+  const socialLinks = [
+    { name: "GitHub", url: "https://github.com/rajat3154", icon: <GithubIcon /> },
+    { name: "LinkedIn", url: "https://www.linkedin.com/in/rajat-ranvir", icon: <LinkedinIcon /> },
+    { name: "Twitter", url: "https://x.com", icon: <TwitterIcon /> },
   ];
 
   return (
-    <footer className="w-full bg-slate-50 dark:bg-black pt-20 pb-12 relative overflow-hidden">
-      
-      {/* Top Gradient Fade */}
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-slate-300 dark:via-white/20 to-transparent"></div>
-
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+    <footer className="w-full bg-slate-50 dark:bg-black border-t border-slate-200 dark:border-white/10 pt-16 pb-8 transition-colors duration-300">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
         
-        {/* --- MAIN GRID LAYOUT --- */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        {/* --- Top Section: 3 Columns --- */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           
-          {/* 1. BRAND & BIO (Span 2 cols on Large) */}
-          <div className="lg:col-span-2 p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 flex flex-col justify-between h-full">
-             <div>
-                <h3 className="text-3xl font-bold text-slate-900 dark:text-white mb-2 tracking-tight">Rajat Ranvir</h3>
-                <p className="text-slate-600 dark:text-slate-400 max-w-sm">
-                  Architecting intelligent systems through Machine Learning, NLP, and Generative AI.
-                </p>
-             </div>
-             
-             <div className="mt-12">
-               <form className="relative max-w-xs">
-                 <input 
-                   type="email" 
-                   placeholder="Drop a message..." 
-                   className="w-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-full px-5 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all placeholder:text-slate-400"
-                 />
-                 <button className="absolute right-1.5 top-1.5 p-1.5 bg-slate-900 dark:bg-white rounded-full text-white dark:text-black hover:scale-105 transition-transform">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
-                      <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                    </svg>
-                 </button>
-               </form>
-             </div>
-          </div>
-
-          {/* 2. NAVIGATION MODULE */}
-          <div className="p-8 rounded-3xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/5 flex flex-col justify-between">
-             <h4 className="font-bold text-slate-900 dark:text-white mb-6 uppercase tracking-wider text-xs">Explore</h4>
-             <ul className="space-y-3">
-               {navLinks.map((link) => (
-                 <li key={link.label}>
-                   <a href={link.href} className="group flex items-center justify-between text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
-                     {link.label}
-                     <svg className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                     </svg>
-                   </a>
-                 </li>
-               ))}
-             </ul>
-          </div>
-
-          {/* 3. STATUS WIDGET (Time & Location) */}
-          <div className="p-8 rounded-3xl bg-slate-900 dark:bg-black border border-slate-800 dark:border-white/10 text-white flex flex-col justify-between relative overflow-hidden group">
-             
-             {/* Animated Pulse background */}
-             <div className="absolute top-[-50%] right-[-50%] w-full h-full bg-blue-600/20 blur-[80px] rounded-full group-hover:bg-purple-600/20 transition-colors duration-1000"></div>
-
-             <div className="relative z-10">
-                <h4 className="font-bold uppercase tracking-wider text-xs text-white/50 mb-6">Status</h4>
-                <div className="flex items-center gap-2 mb-1">
-                   <span className="relative flex h-2.5 w-2.5">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-                   </span>
-                   <span className="text-sm font-medium text-emerald-400">Available for hire</span>
-                </div>
-                <p className="text-3xl font-mono tracking-tighter font-light">
-                  {time}
-                </p>
-             </div>
-
-             <div className="relative z-10 mt-8">
-                <p className="text-xs text-white/50 uppercase tracking-wider font-bold">Base</p>
-                <p className="text-sm font-medium">Chhatrapati Sambhajinagar, <br/>Maharashtra, India</p>
-             </div>
-          </div>
-
-        </div>
-
-
-        {/* --- BOTTOM BAR --- */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6 pt-8 border-t border-slate-200 dark:border-white/10">
-           
-           <p className="text-sm text-slate-500 dark:text-slate-500 font-medium">
-             © {new Date().getFullYear()} Rajat Ranvir.
-           </p>
-
-           {/* Floating Social Dock */}
-           <div className="flex items-center gap-1 p-1.5 rounded-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 shadow-sm">
-              {socials.map((s) => (
+          {/* Column 1: Brand & Bio (Spans 2 columns on medium screens) */}
+          <div className="md:col-span-2 space-y-4">
+            <h3 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">
+              Rajat Ranvir
+            </h3>
+            <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed max-w-sm">
+              Full-stack developer architecting intelligent systems. Focused on clean code, performance, and user-centric design. Open for collaborations and new opportunities.
+            </p>
+            {/* Social Icons */}
+            <div className="flex gap-4 pt-4">
+              {socialLinks.map((social) => (
                 <a 
-                  key={s.name} 
-                  href={s.url} 
+                  key={social.name} 
+                  href={social.url} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/10 hover:text-black dark:hover:text-white transition-all"
-                  aria-label={s.label}
+                  className="p-2 rounded-full bg-slate-200 dark:bg-white/10 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-white/20 hover:text-black dark:hover:text-white transition-all"
+                  aria-label={social.name}
                 >
-                  {s.name}
+                  {social.icon}
                 </a>
               ))}
-           </div>
+            </div>
+          </div>
 
+          {/* Column 2: Navigation */}
+          <div>
+            <h4 className="font-semibold text-slate-900 dark:text-white mb-6">Navigation</h4>
+            <ul className="space-y-3">
+              {navLinks.map((link) => (
+                <li key={link.label}>
+                  <a 
+                    href={link.href} 
+                    className="text-sm text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 3: Contact */}
+          <div>
+            <h4 className="font-semibold text-slate-900 dark:text-white mb-6">Contact</h4>
+            <div className="space-y-4">
+              <div>
+                <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Email</p>
+                <a 
+                  href="mailto:rajaturanvir31@gmail.com" 
+                  className="text-sm text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                >
+                  rajaturanvir31@gmail.com
+                </a>
+              </div>
+              <div>
+                <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Location</p>
+                <p className="text-sm text-slate-600 dark:text-slate-400">Maharashtra, India</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* --- Bottom Section: Copyright --- */}
+        <div className="pt-8 border-t border-slate-200 dark:border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-xs text-slate-500 dark:text-slate-500">
+            &copy; {currentYear} Rajat Ranvir. All rights reserved.
+          </p>
+          
+          <button 
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="text-xs font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center gap-1 transition-colors"
+          >
+            Back to Top
+            <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+            </svg>
+          </button>
         </div>
 
       </div>
     </footer>
+  );
+}
+
+// --- Icons ---
+
+function GithubIcon() {
+  return (
+    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+  );
+}
+
+function LinkedinIcon() {
+  return (
+    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+  );
+}
+
+function TwitterIcon() {
+  return (
+    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
   );
 }

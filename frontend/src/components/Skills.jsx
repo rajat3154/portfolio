@@ -90,12 +90,12 @@ export default function Skills() {
     {
       title: "Data Libraries",
       color: "orange",
-      skills: ["Pandas", "Numpy", "Matplotlib", "Scikit-Learn", "BeautifulSoup", "Uvicorn"],
+      skills: ["Pandas", "Numpy", "Matplotlib", "Scikit-Learn",  "Uvicorn"],
     },
     {
       title: "AI & Deep Learning",
       color: "purple",
-      skills: ["TensorFlow", "Keras", "Hugging Face", "Vertex AI", "NVIDIA NIM", "Gradio"],
+      skills: ["TensorFlow", "Keras", "Hugging Face", "NVIDIA NIM", "Gradio"],
     },
     {
       title: "Generative AI",
@@ -105,12 +105,12 @@ export default function Skills() {
     {
       title: "Databases",
       color: "emerald",
-      skills: ["PostgreSQL", "MongoDB", "MySQL", "SQLite", "Redis", "ChromaDB", "Pinecone", "Neo4j", "AstraDB", "Cassandra"],
+      skills: ["PostgreSQL", "MongoDB", "MySQL", "SQLite", "ChromaDB",  "Neo4j", "AstraDB", "Cassandra"],
     },
     {
       title: "Tools & DevOps",
       color: "zinc",
-      skills: ["Git", "GitHub", "Docker", "Linux", "VSCode", "Jupyter", "Colab", "Anaconda", "PowerBI", "Streamlit"],
+      skills: ["Git", "GitHub", "VSCode", "Jupyter", "Colab", "Anaconda", "PowerBI", "Streamlit"],
     },
   ];
 
@@ -118,7 +118,7 @@ export default function Skills() {
     <section className="w-full py-24 bg-slate-50 dark:bg-black overflow-hidden relative">
       
       {/* Background Texture */}
-      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-black opacity-20 pointer-events-none"></div>
       
       <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
         

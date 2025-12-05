@@ -3,32 +3,44 @@ import React from "react";
 export default function Experience() {
   const experiences = [
     {
-      role: "Data Analyst Intern",
-      company: "Elevate Labs",
-      period: "May '25 - June '25",
-      description: "Spearheaded data preprocessing pipelines and EDA. Engineered interactive dashboards that reduced reporting time by 30%.",
-      skills: ["Python", "Pandas", "PowerBI"],
       id: "ID: 9821-44",
-      color: "blue",
-      gradient: "from-blue-600 to-indigo-600"
-    },
-    {
-      role: "AI & Cloud Intern",
-      company: "Edunet Foundation",
-      period: "Jul '25 - Aug '25",
-      description: "Deployed predictive models on cloud infrastructure using IBM SkillsBuild. Optimized cloud storage solutions for large-scale datasets.",
-      skills: ["IBM Cloud", "AutoML", "DevOps"],
-      id: "ID: 5521-88",
-      color: "purple",
-      gradient: "from-purple-600 to-pink-500"
-    },
-    {
       role: "AI/ML Intern",
       company: "Elevate Labs",
-      period: "Dec '23 - Jan '24",
-      description: "Developed NLP workflows for sentiment analysis. Automated model evaluation scripts, increasing testing efficiency by 2x.",
-      skills: ["NLP", "TensorFlow", "Automation"],
+      period: "July 2025 - Aug 2025",
+      tasks: [
+        "Performed data cleaning, preprocessing, and EDA with Pandas, NumPy, Matplotlib.",
+        "Built ML models (Regression, Trees, RF, KNN, SVM, K-Means) using Scikit-learn.",
+        "Evaluated models with accuracy, precision, recall, AUC, and F1-score."
+      ],
+      skills: ["Scikit-learn", "Pandas", "ML Models"],
+      color: "purple",
+      gradient: "from-purple-600 to-indigo-600"
+    },
+    {
+      id: "ID: 5521-88",
+      role: "Data Analyst Intern",
+      company: "Elevate Labs",
+      period: "May 2025 - June 2025",
+      tasks: [
+        "Performed data cleaning, preprocessing, and EDA using Pandas, NumPy, and Seaborn.",
+        "Developed SQL queries and interactive dashboards with Python, SQLite, and Power BI.",
+        "Created visualizations and reports with Matplotlib, Seaborn, and Power BI."
+      ],
+      skills: ["SQL", "Power BI", "Python"],
+      color: "blue",
+      gradient: "from-blue-600 to-cyan-500"
+    },
+    {
       id: "ID: 3321-12",
+      role: "AI and Cloud Intern",
+      company: "Edunet Foundations",
+      period: "Dec 2023 - Jan 2024",
+      tasks: [
+        "Completed 4-week internship in AI, Data Science, and Cloud with IBM SkillsBuild.",
+        "Applied Python, SQL, and ML for EDA, predictive modeling, and deployment.",
+        "Earned IBM badges in Enterprise Data Science and AI; gained exposure to GenAI."
+      ],
+      skills: ["IBM Cloud", "GenAI", "Data Science"],
       color: "emerald",
       gradient: "from-emerald-600 to-teal-500"
     },
@@ -71,29 +83,32 @@ function FlipCard({ exp, index }) {
   const themes = {
     blue: {
       bg: "bg-blue-600",
-      text: "text-blue-500",
+      text: "text-blue-400",
       border: "border-blue-500/30",
-      shadow: "shadow-blue-500/20"
+      shadow: "shadow-blue-500/20",
+      chip: "bg-blue-500/20 border-blue-400/30 text-blue-300"
     },
     purple: {
       bg: "bg-purple-600",
-      text: "text-purple-500",
+      text: "text-purple-400",
       border: "border-purple-500/30",
-      shadow: "shadow-purple-500/20"
+      shadow: "shadow-purple-500/20",
+      chip: "bg-purple-500/20 border-purple-400/30 text-purple-300"
     },
     emerald: {
       bg: "bg-emerald-600",
-      text: "text-emerald-500",
+      text: "text-emerald-400",
       border: "border-emerald-500/30",
-      shadow: "shadow-emerald-500/20"
+      shadow: "shadow-emerald-500/20",
+      chip: "bg-emerald-500/20 border-emerald-400/30 text-emerald-300"
     }
   };
   
-  const theme = themes[exp.color];
+  const theme = themes[exp.color] || themes.blue;
 
   return (
     <div 
-      className="group relative h-[400px] w-full [perspective:1000px] cursor-pointer"
+      className="group relative h-[420px] w-full [perspective:1000px] cursor-pointer"
       style={{ animationDelay: `${index * 150}ms` }}
     >
       
@@ -127,15 +142,16 @@ function FlipCard({ exp, index }) {
               </p>
 
               {/* Decorative ID Chip */}
-              <div className="w-12 h-9 rounded bg-yellow-200/50 border border-yellow-400/50 relative mb-auto">
+              <div className="w-12 h-9 rounded bg-yellow-200/50 border border-yellow-400/50 relative mb-auto flex items-center justify-center overflow-hidden">
                  <div className="absolute top-1/2 left-0 w-full h-px bg-yellow-500/40"></div>
                  <div className="absolute left-1/2 top-0 w-px h-full bg-yellow-500/40"></div>
+                 <div className="w-8 h-5 border border-yellow-600/30 rounded-sm"></div>
               </div>
 
               {/* Footer info */}
               <div className="w-full border-t border-slate-100 dark:border-white/5 pt-4 flex justify-between items-center text-xs font-mono text-slate-400">
                  <span>{exp.period}</span>
-                 <span className="flex items-center gap-1">
+                 <span className="flex items-center gap-1 group-hover:text-blue-500 transition-colors">
                     Flip for details 
                     <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                  </span>
@@ -155,7 +171,7 @@ function FlipCard({ exp, index }) {
            {/* Header */}
            <div className="flex justify-between items-start mb-6">
               <div className="text-left">
-                 <h4 className="text-lg font-bold text-white mb-1">Overview</h4>
+                 <h4 className="text-lg font-bold text-white mb-1">Task Log</h4>
                  <p className={`text-xs font-mono uppercase tracking-wider ${theme.text}`}>{exp.id}</p>
               </div>
               <div className={`w-8 h-8 rounded-full ${theme.bg} flex items-center justify-center shadow-lg shadow-white/10`}>
@@ -165,17 +181,21 @@ function FlipCard({ exp, index }) {
               </div>
            </div>
 
-           {/* Description */}
-           <p className="text-slate-300 text-sm leading-relaxed mb-8">
-             {exp.description}
-           </p>
+           {/* Tasks List */}
+           <ul className="text-slate-300 text-sm leading-relaxed mb-8 space-y-3 list-disc list-outside ml-4">
+             {exp.tasks.map((task, i) => (
+               <li key={i} className="pl-1 marker:text-slate-500">
+                 {task}
+               </li>
+             ))}
+           </ul>
 
            {/* Tech Stack */}
            <div className="mt-auto">
               <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-3">Tech Stack</p>
               <div className="flex flex-wrap gap-2">
                  {exp.skills.map((skill, i) => (
-                    <span key={i} className="px-3 py-1 rounded-md bg-white/10 border border-white/5 text-xs text-white font-medium">
+                    <span key={i} className={`px-2 py-1 rounded text-[10px] font-semibold tracking-wide ${theme.chip}`}>
                        {skill}
                     </span>
                  ))}
