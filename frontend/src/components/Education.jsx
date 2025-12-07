@@ -111,7 +111,7 @@ function TimelineItem({ edu, index, total }) {
 
       {/* 2. THE CARD (Bottom Section) */}
       <div className="w-full px-4">
-        <div className="relative p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 shadow-lg transition-all duration-500 group-hover:-translate-y-2 group-hover:shadow-2xl group-hover:border-transparent">
+        <div className="relative p-6 rounded-2xl bg-white dark:bg-gray-950 border border-slate-200 dark:border-white/10 shadow-lg transition-all duration-500 group-hover:-translate-y-2 group-hover:shadow-2xl group-hover:border-transparent">
           
           {/* Gradient Border Reveal on Hover */}
           <div className={`absolute inset-0 -z-10 rounded-2xl bg-gradient-to-br ${edu.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}>

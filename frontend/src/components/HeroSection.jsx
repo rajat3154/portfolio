@@ -252,7 +252,7 @@ const RoboProfileReveal = () => {
       
       {/* --- THE ENHANCED CARD --- */}
       <div 
-        className={`absolute z-20 w-[380px] h-[480px] bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl border border-white/50 dark:border-white/10 rounded-[2rem] shadow-2xl flex flex-col items-center overflow-hidden transition-all duration-1000 cubic-bezier(0.34, 1.56, 0.64, 1)
+        className={`absolute z-20 w-[380px] h-[480px] bg-white/95 dark:bg-gray-950  border border-white/50 dark:border-white/10 rounded-[2rem] shadow-2xl flex flex-col items-center overflow-hidden transition-all duration-1000 cubic-bezier(0.34, 1.56, 0.64, 1)
             ${['initial', 'handshake'].includes(stage) ? 'scale-0 opacity-0 translate-y-10' : 'scale-100 opacity-100 translate-y-0'}
         `}
       >
@@ -357,8 +357,8 @@ export default function HeroSection() {
         }}
       />
 
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-blue-500/20 rounded-full blur-[120px] opacity-50 dark:opacity-20 pointer-events-none animate-pulse" />
-      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-indigo-500/10 rounded-full blur-[100px] pointer-events-none animate-pulse delay-700" />
+
+
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center h-full">
 
