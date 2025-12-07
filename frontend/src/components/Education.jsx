@@ -38,7 +38,7 @@ export default function Education() {
     <section id="education" className="w-full py-24 bg-slate-50 dark:bg-black overflow-hidden relative transition-colors duration-500">
       
       {/* Background Ambience */}
-      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-black  pointer-events-none"></div>
+      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-slate-50 dark:bg-black  pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
         

@@ -46,7 +46,7 @@ export default function FeedbackCarousel() {
   const loopFeedbacks = [...feedbacks, ...feedbacks];
 
   return (
-    <section className="w-full py-24 bg-slate-50 dark:bg-black transition-colors duration-500 overflow-hidden relative">
+    <section id="testimonials" className="w-full py-24 bg-slate-50 dark:bg-black transition-colors duration-500 overflow-hidden relative">
       <div className="max-w-7xl mx-auto px-6 lg:px-12 mb-16 text-center relative z-10">
         <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white tracking-tight mb-4">
           Trusted by <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Innovators</span>
@@ -148,7 +148,7 @@ function FeedbackCard({ fb }) {
                         "{fb.review}"
                     </p>
                 </div>
-                <div className={`absolute -inset-2 bg-gradient-to-r ${fb.color} rounded-[2.5rem] opacity-0 group-hover:opacity-10 blur-2xl transition-opacity duration-500 -z-10`}></div>
+                <div className={`absolute -inset-2 bg-gradient-to-r ${fb.color} rounded-[2.5rem] opacity-0 group-hover:opacity-1 blur-2xl transition-opacity duration-500 -z-10`}></div>
             </div>
         </div>
     );
@@ -273,17 +273,38 @@ function FeedbackModal({ onClose, onSuccess }) {
             <div className="grid grid-cols-2 gap-4">
                 <div>
                     <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Name</label>
-                    <input required name="name" value={formData.name} onChange={handleChange} className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="John Doe" />
+                    <input 
+                        required 
+                        name="name" 
+                        value={formData.name} 
+                        onChange={handleChange} 
+                        className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg px-3 py-2 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                        placeholder="John Doe" 
+                    />
                 </div>
                 <div>
                     <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Role</label>
-                    <input required name="role" value={formData.role} onChange={handleChange} className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Product Manager" />
+                    <input 
+                        required 
+                        name="role" 
+                        value={formData.role} 
+                        onChange={handleChange} 
+                        className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg px-3 py-2 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                        placeholder="Product Manager" 
+                    />
                 </div>
             </div>
 
             <div>
                 <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Company</label>
-                <input required name="company" value={formData.company} onChange={handleChange} className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Acme Corp" />
+                <input 
+                    required 
+                    name="company" 
+                    value={formData.company} 
+                    onChange={handleChange} 
+                    className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg px-3 py-2 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                    placeholder="Acme Corp" 
+                />
             </div>
 
             <div>
@@ -301,7 +322,15 @@ function FeedbackModal({ onClose, onSuccess }) {
 
             <div>
                 <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Review</label>
-                <textarea required name="review" value={formData.review} onChange={handleChange} rows="3" className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Write your experience..."></textarea>
+                <textarea 
+                    required 
+                    name="review" 
+                    value={formData.review} 
+                    onChange={handleChange} 
+                    rows="3" 
+                    className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg px-3 py-2 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                    placeholder="Write your experience..."
+                ></textarea>
             </div>
 
             <button disabled={uploading} type="submit" className="w-full bg-slate-900 dark:bg-white text-white dark:text-black font-bold py-3 rounded-xl hover:bg-slate-800 dark:hover:bg-slate-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">

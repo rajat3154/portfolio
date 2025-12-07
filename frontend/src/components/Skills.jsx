@@ -115,10 +115,10 @@ export default function Skills() {
   ];
 
   return (
-    <section className="w-full py-24 bg-slate-50 dark:bg-black overflow-hidden relative">
+    <section id="skills" className="w-full py-24 bg-slate-50 dark:bg-black overflow-hidden relative">
       
       {/* Background Texture */}
-      <div className="absolute inset-0 bg-black opacity-20 pointer-events-none"></div>
+    
       
       <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
         
