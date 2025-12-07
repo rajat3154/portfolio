@@ -239,9 +239,9 @@ export default function Certifications() {
         {/* Content */}
         <div className="max-w-7xl mx-auto px-6 py-12">
            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {certs.map((cert, idx) => (
-                <VaultCard key={idx} cert={cert} index={idx} onView={() => setSelectedCert(cert)} />
-              ))}
+             {certs.map((cert, idx) => (
+               <VaultCard key={idx} cert={cert} index={idx} onView={() => setSelectedCert(cert)} />
+             ))}
            </div>
         </div>
 
@@ -310,22 +310,22 @@ export default function Certifications() {
 
 function VaultCard({ cert, index, onView }) {
   const accentStyles = {
-    blue: "border-blue-500/50 text-blue-400",
-    emerald: "border-emerald-500/50 text-emerald-400",
-    orange: "border-orange-500/50 text-orange-400",
-    purple: "border-purple-500/50 text-purple-400",
+    blue: "border-blue-500/50 text-blue-600 dark:text-blue-400",
+    emerald: "border-emerald-500/50 text-emerald-600 dark:text-emerald-400",
+    orange: "border-orange-500/50 text-orange-600 dark:text-orange-400",
+    purple: "border-purple-500/50 text-purple-600 dark:text-purple-400",
   };
 
   const currentAccent = accentStyles[cert.accent] || accentStyles.blue;
 
   return (
     <div 
-      className="group relative h-64 w-full rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer"
+      className="group relative h-64 w-full rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/10"
       style={{ animationDelay: `${(index % 6) * 100}ms` }}
     >
       
       {/* LAYER 1: CERTIFICATE IMAGE PREVIEW (Bottom) */}
-      <div className="absolute inset-0 z-0 bg-slate-200 dark:bg-slate-800">
+      <div className="absolute inset-0 z-0 bg-slate-100 dark:bg-gray-950">
          <div className="w-full h-full relative overflow-hidden group-hover:scale-105 transition-transform duration-700 ease-out">
             
             {/* Background Image - Clear, No Blur */}
@@ -339,11 +339,11 @@ function VaultCard({ cert, index, onView }) {
                 <div className={`absolute inset-0 bg-gradient-to-br ${cert.color} opacity-20`}></div>
             )}
 
-            {/* Overlay Action */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/10 transition-all duration-300 group-hover:bg-black/30">
+            {/* Overlay Action (Appears on Hover) */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-300">
                <button 
                  onClick={(e) => { e.stopPropagation(); onView(); }}
-                 className="px-6 py-2 rounded-full text-xs font-bold bg-white text-black shadow-lg hover:scale-105 transition-transform z-20 flex items-center gap-2"
+                 className="transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 px-6 py-2 rounded-full text-xs font-bold bg-white text-black shadow-lg hover:scale-105 flex items-center gap-2"
                >
                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
                  View Credential
@@ -352,43 +352,43 @@ function VaultCard({ cert, index, onView }) {
          </div>
       </div>
 
-      {/* LAYER 2: THE "BLACK CARD" INFO (Top) */}
+      {/* LAYER 2: THE INFO CARD (Top) */}
       <div 
         onClick={onView}
-        className="absolute inset-0 z-10 bg-[#0a0a0a] border border-white/10 p-6 flex flex-col justify-between transition-transform duration-500 cubic-bezier(0.4, 0, 0.2, 1) group-hover:translate-y-[110%]"
+        className="absolute inset-0 z-10 bg-white dark:bg-gray-950 border-b border-slate-100 dark:border-white/5 p-6 flex flex-col justify-between transition-transform duration-500 cubic-bezier(0.4, 0, 0.2, 1) group-hover:translate-y-[110%]"
       >
         <div className="flex justify-between items-start">
           <div className="flex items-center gap-3">
-             <div className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
-                <svg viewBox="0 0 24 24" className="w-5 h-5 text-white" fill="currentColor">
+             <div className="w-10 h-10 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center">
+                <svg viewBox="0 0 24 24" className="w-5 h-5 text-slate-600 dark:text-white" fill="currentColor">
                   <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
                 </svg>
              </div>
              <div className="overflow-hidden">
-               <p className="text-[10px] text-slate-400 uppercase tracking-wider font-bold">Issuer</p>
-               <p className="text-sm font-semibold text-slate-200 truncate w-24">{cert.company}</p>
+               <p className="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-bold">Issuer</p>
+               <p className="text-sm font-bold text-slate-800 dark:text-slate-200 truncate w-24">{cert.company}</p>
              </div>
           </div>
-          <span className={`px-2 py-1 rounded text-[10px] font-bold border bg-white/5 ${currentAccent}`}>
+          <span className={`px-2 py-1 rounded text-[10px] font-bold border bg-slate-50 dark:bg-white/5 ${currentAccent}`}>
             {cert.type ? cert.type.split(" ")[0].toUpperCase() : "CERT"}
           </span>
         </div>
 
         <div className="mt-4">
-           <h3 className="text-xl font-bold text-white mb-2 leading-snug line-clamp-2">
+           <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2 leading-snug line-clamp-2">
              {cert.title}
            </h3>
-           <p className="text-sm text-slate-400 line-clamp-2">
+           <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">
              {cert.desc}
            </p>
         </div>
 
-        <div className="mt-auto pt-4 border-t border-white/10 flex items-center justify-between">
+        <div className="mt-auto pt-4 border-t border-slate-100 dark:border-white/10 flex items-center justify-between">
            <div className="flex flex-col">
-              <span className="text-[9px] text-slate-500 uppercase tracking-widest">Credential ID</span>
-              <span className="font-mono text-xs text-slate-300 tracking-wider">{cert.id}</span>
+              <span className="text-[9px] text-slate-400 dark:text-slate-500 uppercase tracking-widest">Credential ID</span>
+              <span className="font-mono text-xs text-slate-600 dark:text-slate-300 tracking-wider">{cert.id}</span>
            </div>
-           <div className="flex items-center gap-1 text-xs font-medium text-slate-500 group-hover:text-white transition-colors">
+           <div className="flex items-center gap-1 text-xs font-medium text-blue-600 dark:text-blue-400 group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors">
              <span>Reveal</span>
              <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -412,29 +412,29 @@ function CertDialog({ cert, onClose }) {
   }, [onClose]);
 
   const badgeColors = {
-    blue: "text-blue-500",
-    emerald: "text-emerald-500",
-    orange: "text-orange-500",
-    purple: "text-purple-500"
+    blue: "text-blue-600 dark:text-blue-400 border-blue-200 dark:border-blue-900 bg-blue-50 dark:bg-blue-900/20",
+    emerald: "text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-900 bg-emerald-50 dark:bg-emerald-900/20",
+    orange: "text-orange-600 dark:text-orange-400 border-orange-200 dark:border-orange-900 bg-orange-50 dark:bg-orange-900/20",
+    purple: "text-purple-600 dark:text-purple-400 border-purple-200 dark:border-purple-900 bg-purple-50 dark:bg-purple-900/20"
   };
-  const badgeColor = badgeColors[cert.accent] || "text-blue-500";
+  const badgeStyle = badgeColors[cert.accent] || badgeColors.blue;
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
       
       {/* Backdrop */}
       <div 
-        className="absolute inset-0 bg-slate-900/80 backdrop-blur-md transition-opacity duration-300"
+        className="absolute inset-0 bg-slate-900/60 dark:bg-black/80 backdrop-blur-sm transition-opacity duration-300"
         onClick={onClose}
       ></div>
 
       {/* Modal Content */}
-      <div className="relative w-full max-w-4xl bg-white dark:bg-[#0a0a0a] rounded-3xl shadow-2xl border border-slate-200 dark:border-white/10 overflow-hidden transform transition-all scale-100 opacity-100 animate-in fade-in zoom-in-95 duration-200 flex flex-col md:flex-row max-h-[90vh]">
+      <div className="relative w-full max-w-4xl bg-white dark:bg-black rounded-3xl shadow-2xl border border-slate-200 dark:border-white/10 overflow-hidden transform transition-all scale-100 opacity-100 animate-in fade-in zoom-in-95 duration-200 flex flex-col md:flex-row max-h-[90vh]">
         
         {/* Close Button */}
         <button 
           onClick={onClose}
-          className="absolute top-4 right-4 z-50 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 backdrop-blur-md transition-colors"
+          className="absolute top-4 right-4 z-50 p-2 rounded-full bg-white/80 dark:bg-black/50 text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-black/70 backdrop-blur-md transition-colors shadow-sm"
         >
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -442,13 +442,12 @@ function CertDialog({ cert, onClose }) {
         </button>
 
         {/* --- LEFT: IMAGE CONTAINER --- */}
-        <div className="w-full md:w-3/5 bg-black/5 dark:bg-black flex items-center justify-center p-4 md:p-8 overflow-hidden relative">
-           
-           <div className={`absolute inset-0 bg-gradient-to-br ${cert.color} opacity-10`}></div>
-           <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
-
-           {/* THE CERTIFICATE IMAGE */}
-           <div className="relative w-full h-auto shadow-2xl rounded-lg overflow-hidden border border-white/10 transform hover:scale-[1.02] transition-transform duration-500">
+        <div className="w-full md:w-3/5 bg-slate-100 dark:bg-black flex items-center justify-center p-4 md:p-8 overflow-hidden relative">
+            
+            <div className={`absolute inset-0 bg-gradient-to-br ${cert.color} opacity-10`}></div>
+            
+            {/* THE CERTIFICATE IMAGE */}
+            <div className="relative w-full h-auto shadow-xl rounded-lg overflow-hidden border border-slate-200 dark:border-white/10 transform hover:scale-[1.02] transition-transform duration-500 bg-white">
               {cert.image ? (
                   <img 
                     src={cert.image} 
@@ -456,19 +455,19 @@ function CertDialog({ cert, onClose }) {
                     className="w-full h-auto object-contain"
                   />
               ) : (
-                  <div className="w-full h-64 bg-slate-800 flex items-center justify-center text-white">Image not available</div>
+                  <div className="w-full h-64 bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400">Image not available</div>
               )}
-           </div>
+            </div>
         </div>
 
         {/* --- RIGHT: DETAILS --- */}
-        <div className="w-full md:w-2/5 p-8 flex flex-col justify-between bg-white dark:bg-[#0a0a0a] overflow-y-auto">
-           <div>
+        <div className="w-full md:w-2/5 p-8 flex flex-col justify-between bg-white dark:bg-black overflow-y-auto border-l border-slate-100 dark:border-white/5">
+            <div>
               <div className="flex items-center gap-2 mb-4">
-                 <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold border bg-transparent border-slate-200 dark:border-white/10 ${badgeColor}`}>
+                 <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold border ${badgeStyle}`}>
                    {cert.type}
                  </span>
-                 <span className="text-xs text-slate-400 font-mono border px-2 py-1 rounded-full border-slate-200 dark:border-white/10">
+                 <span className="text-xs text-slate-500 dark:text-slate-400 font-mono border px-2 py-1 rounded-full border-slate-200 dark:border-white/10">
                    {cert.date}
                  </span>
               </div>
@@ -478,7 +477,7 @@ function CertDialog({ cert, onClose }) {
               </h3>
               
               <div className="flex items-center gap-2 mb-6">
-                 <span className="text-sm font-semibold text-slate-500 dark:text-slate-400">{cert.company}</span>
+                 <span className="text-sm font-semibold text-slate-600 dark:text-slate-400">{cert.company}</span>
                  <span className="w-1 h-1 rounded-full bg-slate-300 dark:bg-slate-700"></span>
                  <span className="text-sm text-slate-400 dark:text-slate-500">Verified</span>
               </div>
@@ -491,24 +490,24 @@ function CertDialog({ cert, onClose }) {
                  <p className="text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">Credential ID</p>
                  <p className="font-mono text-sm text-slate-700 dark:text-slate-200 select-all">{cert.id}</p>
               </div>
-           </div>
+            </div>
 
-           <div className="mt-8 pt-6 border-t border-slate-100 dark:border-white/5 flex gap-3">
-              <a 
-                href={cert.image} 
-                download 
-                className="flex-1 py-3 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-black font-bold text-sm hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
-              >
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
-                Download
-              </a>
-              <button 
-                onClick={onClose}
-                className="px-4 py-3 rounded-xl border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-colors"
-              >
-                 Close
-              </button>
-           </div>
+            <div className="mt-8 pt-6 border-t border-slate-100 dark:border-white/5 flex gap-3">
+               <a 
+                 href={cert.image} 
+                 download 
+                 className="flex-1 py-3 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-black font-bold text-sm hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
+               >
+                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+                 Download
+               </a>
+               <button 
+                 onClick={onClose}
+                 className="px-4 py-3 rounded-xl border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-white/5 transition-colors"
+               >
+                  Close
+               </button>
+            </div>
         </div>
 
       </div>

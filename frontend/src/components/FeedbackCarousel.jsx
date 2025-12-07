@@ -20,29 +20,25 @@ export default function FeedbackCarousel() {
       const res = await fetch(`${BACKEND_URL}/api/feedback`);
       if (res.ok) {
         const data = await res.json();
-        // If DB is empty, data might be [], you can use fallback data if you want
         if (data.length > 0) {
             setFeedbacks(data);
         } else {
-            // Fallback initial data if DB is empty
             setFeedbacks(INITIAL_DATA);
         }
       }
     } catch (error) {
       console.error("Failed to fetch feedbacks:", error);
-      setFeedbacks(INITIAL_DATA); // Fallback to hardcoded data on error
+      setFeedbacks(INITIAL_DATA);
     } finally {
       setLoading(false);
     }
   };
 
   const handleNewFeedback = (newFeedback) => {
-    // Optimistically update UI
     setFeedbacks(prev => [newFeedback, ...prev]); 
     setIsModalOpen(false);
   };
 
-  // Duplicate for seamless looping (UI logic)
   const loopFeedbacks = [...feedbacks, ...feedbacks];
 
   return (
@@ -66,7 +62,6 @@ export default function FeedbackCarousel() {
         </button>
       </div>
 
-      {/* --- INFINITE TRACK --- */}
       <div className="relative w-full">
         <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-slate-50 dark:from-black to-transparent z-20 pointer-events-none"></div>
         <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-slate-50 dark:from-black to-transparent z-20 pointer-events-none"></div>
@@ -101,7 +96,6 @@ export default function FeedbackCarousel() {
 
 // --- SUB-COMPONENT: CARD ---
 function FeedbackCard({ fb }) {
-    // Helper to render stars
     const renderStars = (rating) => (
         <div className="flex gap-0.5">
           {[...Array(5)].map((_, i) => (
@@ -114,7 +108,7 @@ function FeedbackCard({ fb }) {
 
     return (
         <div className="w-[380px] md:w-[420px] shrink-0 perspective-1000">
-            <div className="group relative h-full p-8 rounded-3xl bg-white/90 dark:bg-slate-900/80 backdrop-blur-md border border-slate-200/50 dark:border-white/10 transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl hover:shadow-slate-200/50 dark:hover:shadow-black/50">
+            <div className="group relative h-full p-8 rounded-3xl bg-white/90 dark:bg-gray-950 backdrop-blur-md border border-slate-200/50 dark:border-white/10 transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl hover:shadow-slate-200/50 dark:hover:shadow-black/50">
                 <div className={`absolute top-0 left-4 right-4 h-[3px] bg-gradient-to-r ${fb.color || 'from-blue-500 to-purple-500'} opacity-70 group-hover:opacity-100 transition-opacity duration-500 rounded-full`}></div>
                 
                 <div className="flex justify-between items-start mb-6">
@@ -195,15 +189,18 @@ function FeedbackModal({ onClose, onSuccess }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // --- VALIDATION: IMAGE IS COMPULSORY ---
+    if (!formData.imageFile) {
+        alert("Please upload a profile photo to continue.");
+        return;
+    }
+
     setUploading(true);
 
     try {
-        let imageUrl = null;
-        
-        // 1. Upload Image if exists
-        if (formData.imageFile) {
-            imageUrl = await uploadToCloudinary(formData.imageFile);
-        }
+        // 1. Upload Image (Now guaranteed to run)
+        const imageUrl = await uploadToCloudinary(formData.imageFile);
 
         // 2. Prepare Payload
         const initials = formData.name.split(" ").map(n => n[0]).join("").toUpperCase().slice(0, 2);
@@ -214,9 +211,9 @@ function FeedbackModal({ onClose, onSuccess }) {
             company: formData.company,
             review: formData.review,
             initials: initials || "U",
-            color: "from-blue-500 to-purple-500", // Default gradient
+            color: "from-blue-500 to-purple-500", 
             rating: formData.rating,
-            image: imageUrl // Send the Cloudinary URL (or null)
+            image: imageUrl 
         };
 
         // 3. Send to Backend
@@ -228,7 +225,6 @@ function FeedbackModal({ onClose, onSuccess }) {
 
         if (response.ok) {
             const result = await response.json();
-            // Call success handler with the data returned from backend (or constructed payload)
             onSuccess(result.data || payload); 
         } else {
             alert("Failed to save feedback");
@@ -245,9 +241,9 @@ function FeedbackModal({ onClose, onSuccess }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-slate-900/80 backdrop-blur-sm" onClick={onClose}></div>
-      <div className="relative w-full max-w-lg bg-white dark:bg-[#111] rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+      <div className="relative w-full max-w-lg bg-white dark:bg-black rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
         
-        <div className="px-6 py-4 border-b border-slate-100 dark:border-white/10 flex justify-between items-center bg-slate-50 dark:bg-white/5">
+        <div className="px-6 py-4 border-b border-slate-100 dark:border-white/10 flex justify-between items-center bg-slate-50 dark:bg-black">
             <h3 className="text-lg font-bold text-slate-900 dark:text-white">Submit Feedback</h3>
             <button onClick={onClose} className="text-slate-400 hover:text-slate-900 dark:hover:text-white">
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
@@ -265,8 +261,10 @@ function FeedbackModal({ onClose, onSuccess }) {
                     <input type="file" accept="image/*" onChange={handleFileChange} className="absolute inset-0 opacity-0 cursor-pointer" />
                 </div>
                 <div className="flex-1">
-                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Profile Photo</label>
-                    <p className="text-xs text-slate-500">Click circle to upload (optional)</p>
+                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                        Profile Photo 
+                    </label>
+                    <p className="text-xs text-slate-500">Click circle to upload (Required)</p>
                 </div>
             </div>
 
@@ -278,7 +276,7 @@ function FeedbackModal({ onClose, onSuccess }) {
                         name="name" 
                         value={formData.name} 
                         onChange={handleChange} 
-                        className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg px-3 py-2 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                        className="w-full bg-slate-50 dark:bg-gray-950 border border-slate-200 dark:border-white/10 rounded-lg px-3 py-2 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
                         placeholder="John Doe" 
                     />
                 </div>
@@ -289,7 +287,7 @@ function FeedbackModal({ onClose, onSuccess }) {
                         name="role" 
                         value={formData.role} 
                         onChange={handleChange} 
-                        className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg px-3 py-2 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                        className="w-full bg-slate-50 dark:bg-gray-950 border border-slate-200 dark:border-white/10 rounded-lg px-3 py-2 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
                         placeholder="Product Manager" 
                     />
                 </div>
@@ -302,7 +300,7 @@ function FeedbackModal({ onClose, onSuccess }) {
                     name="company" 
                     value={formData.company} 
                     onChange={handleChange} 
-                    className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg px-3 py-2 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                    className="w-full bg-slate-50 dark:bg-gray-950 border border-slate-200 dark:border-white/10 rounded-lg px-3 py-2 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
                     placeholder="Acme Corp" 
                 />
             </div>
@@ -328,7 +326,7 @@ function FeedbackModal({ onClose, onSuccess }) {
                     value={formData.review} 
                     onChange={handleChange} 
                     rows="3" 
-                    className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg px-3 py-2 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                    className="w-full bg-slate-50 dark:bg-gray-950 border border-slate-200 dark:border-white/10 rounded-lg px-3 py-2 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
                     placeholder="Write your experience..."
                 ></textarea>
             </div>
@@ -342,7 +340,7 @@ function FeedbackModal({ onClose, onSuccess }) {
   );
 }
 
-// Initial Placeholder Data (Used if DB is empty or fails)
+// Initial Placeholder Data
 const INITIAL_DATA = [
     {
       name: "Amit Sharma",
@@ -352,7 +350,7 @@ const INITIAL_DATA = [
       initials: "AS",
       color: "from-blue-500 to-cyan-400",
       rating: 5,
-      image: null
+      image: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
     },
     {
       name: "Priya Nair",
@@ -362,6 +360,26 @@ const INITIAL_DATA = [
       initials: "PN",
       color: "from-purple-500 to-pink-400",
       rating: 5,
-      image: null
+      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+    },
+    {
+      name: "Rahul Verma",
+      role: "Product Manager",
+      company: "InnovateX",
+      review: "A true professional. His ability to integrate AI models seamlessly is impressive.",
+      initials: "RV",
+      color: "from-emerald-500 to-teal-400",
+      rating: 5,
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+    },
+    {
+      name: "Sneha Gupta",
+      role: "CTO",
+      company: "StartUp Inc.",
+      review: "Rajat's full-stack skills are top-notch. He delivered our MVP ahead of schedule.",
+      initials: "SG",
+      color: "from-orange-500 to-amber-400",
+      rating: 5,
+      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
     }
 ];

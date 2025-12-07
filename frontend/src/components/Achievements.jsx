@@ -68,7 +68,7 @@ function AchievementCard({ ach, index }) {
 
   return (
     <div
-      className="group relative p-8 rounded-3xl bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200/50 dark:border-white/10 overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl"
+      className="group relative p-8 rounded-3xl bg-white/80 dark:bg-gray-950 backdrop-blur-xl border border-slate-200/50 dark:border-white/10 overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl"
       style={{ animationDelay: `${index * 150}ms` }}
     >
       

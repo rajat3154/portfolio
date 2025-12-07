@@ -118,7 +118,7 @@ function FlipCard({ exp, index }) {
         {/* ==============================================
             FRONT FACE (The ID Card)
         =============================================== */}
-        <div className="absolute inset-0 h-full w-full [backface-visibility:hidden] rounded-[20px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 shadow-xl overflow-hidden flex flex-col">
+        <div className="absolute inset-0 h-full w-full [backface-visibility:hidden] rounded-[20px] bg-white dark:bg-gray-950 border border-slate-200 dark:border-white/10 shadow-xl overflow-hidden flex flex-col">
            
            {/* Top Gradient Header */}
            <div className={`h-32 w-full bg-gradient-to-br ${exp.gradient} relative overflow-hidden`}>

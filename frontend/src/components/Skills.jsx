@@ -188,7 +188,7 @@ function TechRowCard({ title, skills, color, getSkillData, index }) {
 
   return (
     <div 
-      className="group relative rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1 overflow-hidden"
+      className="group relative rounded-2xl bg-white dark:bg-gray-950 border border-slate-200 dark:border-white/10 shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1 overflow-hidden"
     >
       {/* Background Gradient on Hover */}
       <div className={`absolute inset-0 bg-gradient-to-r ${colorMap[color]} opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`}></div>

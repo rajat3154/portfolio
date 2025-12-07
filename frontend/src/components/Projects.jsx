@@ -250,7 +250,7 @@ function DomainPanel({ domain, isActive, onActivate, onProjectClick }) {
     <div
       onMouseEnter={onActivate}
       className={`
-        relative overflow-hidden rounded-[1.5rem] border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900 transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] cursor-pointer
+        relative overflow-hidden rounded-[1.5rem] border border-slate-200 dark:border-white/10 bg-white dark:bg-gray-950 transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] cursor-pointer
         ${isActive ? 'lg:flex-[3.5]' : 'lg:flex-[0.6]'}
         ${isActive ? 'h-[550px] lg:h-auto' : 'h-20 lg:h-auto'} 
         flex flex-col
